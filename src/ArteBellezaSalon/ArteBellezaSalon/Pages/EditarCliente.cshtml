@@ -1,0 +1,65 @@
+﻿@page "{id:int}"
+@model ArteBellezaSalon.Pages.EditarClienteModel
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<h2>Editar Cliente</h2>
+
+<!-- Mostrar mensaje de éxito -->
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form method="post" class="row g-3">
+    <input type="hidden" asp-for="Cliente.Id" />
+
+    <div class="col-md-6">
+        <label class="form-label">Cédula</label>
+        <input asp-for="Cliente.Cedula" class="form-control" />
+        <span asp-validation-for="Cliente.Cedula" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        <input asp-for="Cliente.Nombre" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Apellido</label>
+        <input asp-for="Cliente.Apellido" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Email</label>
+        <input asp-for="Cliente.Email" class="form-control" />
+        <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Teléfono</label>
+        <input asp-for="Cliente.Telefono" class="form-control" />
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Tipo</label>
+        <select asp-for="Cliente.Tipo" class="form-select">
+            <option value="">Seleccione tipo</option>
+            <option value="Cliente" selected="@(Model.Cliente.Tipo == "Cliente")">Cliente</option>
+            <option value="Proveedor" selected="@(Model.Cliente.Tipo == "Proveedor")">Proveedor</option>
+            <option value="Invitado" selected="@(Model.Cliente.Tipo == "Invitado")">Invitado</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
